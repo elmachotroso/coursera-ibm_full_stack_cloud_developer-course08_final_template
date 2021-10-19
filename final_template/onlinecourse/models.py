@@ -128,7 +128,7 @@ class Question(models.Model):
 
     def __str__(self):
         return "Lesson: {}, Question: {}, Grade: {}".format(
-            self.lesson.name,
+            self.lesson.pk,
             self.question_text,
             self.grade
         )
@@ -161,7 +161,7 @@ class Choice(models.Model):
         return "choice_text: {}, is_correct: {}, Question: {}".format(
             self.choice_text,
             self.is_correct,
-            self.question.name,
+            self.question.question_text,
         )
 
 class Submission(models.Model):

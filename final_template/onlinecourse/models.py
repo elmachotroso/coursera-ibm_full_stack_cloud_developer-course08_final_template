@@ -137,7 +137,7 @@ class Question(models.Model):
         all_answers = self.choice_set.filter(is_correct=True).count()
         selected_correct = self.choice_set.filter(is_correct=True, id__in=selected_ids).count()
         percentage = selected_correct / all_answers
-        return ( self.grade * percentage ) // 1
+        return (self.grade * percentage ) // 1, self.grade
 
     def is_get_score(self, selected_ids):
         all_answers = self.choice_set.filter(is_correct=True).count()

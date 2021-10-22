@@ -141,9 +141,13 @@ def show_exam_result(request, course_id, submission_id):
         myscore, totalscore = question.get_score( choices )
         total_items += totalscore
         score += myscore
+    
+    context[ "course" ] = course
+    context[ "choices" ] = choices
+    context[ "lessons" ] = lessons
     context[ "total_items" ] = total_items
     context[ "score" ] = score
-    print("context = {}".format( context ))
+    context[ "grade" ] = round(score / total_items * 100, 2)
     return render(request, 'onlinecourse/exam_result_bootstrap.html', context)
 
 

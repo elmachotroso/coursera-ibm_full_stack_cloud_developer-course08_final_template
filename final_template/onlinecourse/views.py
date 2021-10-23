@@ -138,7 +138,7 @@ def show_exam_result(request, course_id, submission_id):
     total_score = 0
     score = 0
     for question in questions:
-        points, totalpoints = question.get_score( choices )
+        points, totalpoints = question.get_score(choices)
         total_score += totalpoints
         score += points
     
@@ -148,14 +148,12 @@ def show_exam_result(request, course_id, submission_id):
     grade = 100
     if total_score > 0:
         grade = round(score / total_score * 100, 2)
-        grade_int = grade // 1
+        grade_int = int( grade )
         print("///////////// {}, {}".format(grade, grade_int))
         if (grade - grade_int) == 0:
             grade = grade_int
-    context[ "total_score" ] = total_score
-    context[ "score" ] = score
-    context[ "grade" ] = grade
     print( ">>>>> {}, {}".format(score, total_score))
+    context[ "grade" ] = grade
     return render(request, 'onlinecourse/exam_result_bootstrap.html', context)
 
 

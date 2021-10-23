@@ -34,7 +34,7 @@
         </ul>
     </div>
 </nav>
-
+    {% if user.is_authenticated %}
     <div class="container-fluid">
         {% if grade > 80 %}
         <div class="alert alert-success">
@@ -78,5 +78,6 @@
             </div>
         </div>
     </div>
+    {% endif %}
 </body>
 </html>

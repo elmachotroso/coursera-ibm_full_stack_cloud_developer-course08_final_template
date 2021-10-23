@@ -135,13 +135,15 @@ class Question(models.Model):
 
     def get_score(self, selected):
         choices = self.choice_set.all()
+        selected_count = selected.filter(question__id=self.id,is_correct=True).count()
         total_items = choices.count()
         correct = 0
-        for choice in choices:
-            if choice.is_correct == True and choice in selected:
-                correct += 1
-            elif choice.is_correct == False and choice not in selected:
-                correct += 1
+        if selected_count > 0:
+            for choice in choices:
+                if choice.is_correct == True and choice in selected:
+                    correct += 1
+                elif choice.is_correct == False and choice not in selected:
+                    correct += 1
         percentage = correct / total_items
         points = percentage * self.grade
         print("###### Q{} {}/{} = {}, {}/{}".format(self.id, correct, total_items, percentage, points, self.grade))
